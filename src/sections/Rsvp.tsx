@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { EVENT, SLOTS } from '@/data/event'
+import { EVENT, FAMILY_SLOT, SLOTS } from '@/data/event'
 import { ApiError, fetchRemaining, submitRsvp } from '@/lib/api'
 import { searchPostcode } from '@/lib/postcode'
 import { Button } from '@/components/Button'
@@ -41,7 +41,7 @@ const slide = {
   transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] as const },
 }
 
-export function Rsvp() {
+export function Rsvp({ family = false }: { family?: boolean }) {
   const [step, setStep] = useState<Step>('attend')
   const [form, setForm] = useState<Form>(initial)
   const [remaining, setRemaining] = useState<Record<string, number> | null>(null)
@@ -89,9 +89,13 @@ export function Rsvp() {
           {step === 'attend' && (
             <motion.div key="attend" className="rsvp__step" {...slide}>
               <h2 className="rsvp__q">전시에 오실 수 있나요?</h2>
-              <p className="rsvp__sub">{EVENT.dateLabel} · {EVENT.timeLabel}</p>
+              <p className="rsvp__sub">{EVENT.dateLabel} · {family ? EVENT.familyTimeLabel : EVENT.timeLabel}</p>
+              {family && <p className="rsvp__note">가족과 함께하는 시간에 초대합니다. 시간은 따로 고르지 않으셔도 됩니다.</p>}
               <div className="rsvp__choices">
-                <Button variant="choice" onClick={() => { set('attending', true); setStep('slot') }}>참석합니다</Button>
+                <Button variant="choice" onClick={() => {
+                  set('attending', true)
+                  if (family) { set('slot', FAMILY_SLOT.label); setStep('who') } else setStep('slot')
+                }}>참석합니다</Button>
                 <Button variant="choice" onClick={() => { set('attending', false); setStep('decline') }}>마음만 보냅니다</Button>
               </div>
             </motion.div>
@@ -103,6 +107,10 @@ export function Rsvp() {
               <p className="rsvp__sub">전시는 시간 내 자유롭게 관람하실 수 있습니다. 시간대별로 스무 분까지 모십니다.</p>
               {error && <p className="rsvp__error">{error}</p>}
               <div className="rsvp__choices">
+                <Button variant="choice" disabled>
+                  <span>{FAMILY_SLOT.display}</span>
+                  <span className="btn__sub">가족과 함께하는 시간</span>
+                </Button>
                 {SLOTS.map((s) => {
                   const left = remaining?.[s.label]
                   const full = left !== undefined && left <= 0
@@ -141,7 +149,7 @@ export function Rsvp() {
                 </div>
               </div>
               <Button disabled={!nameOk || !phoneOk} onClick={() => setStep('ticket')}>다음</Button>
-              <Button variant="ghost" onClick={() => setStep('slot')}>이전</Button>
+              <Button variant="ghost" onClick={() => setStep(family ? 'attend' : 'slot')}>이전</Button>
             </motion.div>
           )}
 
@@ -204,7 +212,7 @@ export function Rsvp() {
                     <h2 className="rsvp__q">{form.name} 님, 12월에 뵙겠습니다.</h2>
                     <p className="rsvp__sub">
                       종이 초대장은 11월 중 우편으로 도착합니다.<br />
-                      {form.slot} 에 스무 자리 중 {form.headcount}자리를 비워두겠습니다.
+                      {family ? '가족과 함께하는 시간' : form.slot}에 {form.headcount}자리를 비워두겠습니다.
                     </p>
                     {ticketCode && (
                       <p className="rsvp__note">모바일 티켓도 함께 발급되었습니다. <a href={`/t/${ticketCode}`}>티켓 보기</a></p>
@@ -213,7 +221,7 @@ export function Rsvp() {
                 ) : (
                   <>
                     <h2 className="rsvp__q">{form.name} 님, 티켓이 발급되었습니다.</h2>
-                    <p className="rsvp__sub">{form.slot} · {form.headcount}명</p>
+                    <p className="rsvp__sub">{family ? FAMILY_SLOT.display : form.slot} · {form.headcount}명</p>
                     {ticketCode && <Button onClick={() => { window.location.href = `/t/${ticketCode}` }}>티켓 열기</Button>}
                   </>
                 )

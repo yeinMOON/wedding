@@ -2,7 +2,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { PROP, STATUS, notion, queryAll, read, write, newTicketCode } from './_notion.js'
 
 const SLOT_CAPACITY = 20
-const SLOTS = ['13:30–14:30', '14:30–15:30', '15:30–16:30', '16:30–17:30', '17:30–19:00']
+const FAMILY_SLOT = '12:30–14:00 (가족)'
+const SLOTS = [FAMILY_SLOT, '14:00–15:00', '15:00–16:00', '16:00–17:00', '17:00–18:00', '18:00–19:00']
 
 type Body = {
   attending: boolean
@@ -60,8 +61,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const memo =
       matches.length === 0 ? '사이트에서 신규 생성' : matches.length > 1 ? '동명이인 확인 필요 (사이트 신규 생성)' : ''
 
-    // 2) 정원 확인 (본인 기존 인원 제외)
-    if (attending && slot) {
+    // 2) 정원 확인 (본인 기존 인원 제외). 가족 시간은 정원 없음
+    if (attending && slot && slot !== FAMILY_SLOT) {
       const attendees = await queryAll({
         and: [
           { property: PROP.status, status: { equals: STATUS.attend } },
