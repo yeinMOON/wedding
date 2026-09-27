@@ -87,8 +87,8 @@ function draw(canvas: HTMLCanvasElement, t: Ticket) {
   ctx.fillText((t.slot ?? EVENT.timeLabel).replace(' (가족)', ''), 560, 1150)
 
   label(ctx, 'VENUE', 140, 1270, ink3, font); ctx.fillStyle = ink; ctx.font = `400 44px ${font}`
-  ctx.fillText(EVENT.venue.name, 140, 1340)
-  ctx.fillStyle = ink3; ctx.font = `400 32px ${font}`; ctx.fillText(EVENT.venue.address, 140, 1395)
+  ctx.fillText(EVENT.venue.address, 140, 1340)
+  ctx.fillStyle = ink3; ctx.font = `400 32px ${font}`; ctx.fillText(EVENT.venue.name, 140, 1395)
 
   line(ctx, 140, 1470, W - 140, ink3)
   ctx.fillStyle = ink3; ctx.font = `400 30px ${font}`; ctx.letterSpacing = '4px'
