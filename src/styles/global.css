@@ -1,0 +1,42 @@
+@import './tokens.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--f-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+
+.app {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--c-bg);
+}
+@media (min-width: 501px) {
+  body { background: #ecebe6; }
+  .app { box-shadow: 0 0 0 1px var(--c-line); }
+}
+
+.section {
+  padding: var(--sp-8) var(--gutter);
+}
+.eyebrow {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-ink-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
