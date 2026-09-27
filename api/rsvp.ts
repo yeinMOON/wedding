@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { PROP, STATUS, notion, queryAll, read, write, newTicketCode } from './_notion.js'
 
 const SLOT_CAPACITY = 20
-const SLOTS = ['12:30–13:30', '13:30–14:30', '14:30–15:30', '15:30–16:30', '16:30–17:30', '17:30–19:00']
+const SLOTS = ['13:30–14:30', '14:30–15:30', '15:30–16:30', '16:30–17:30', '17:30–19:00']
 
 type Body = {
   attending: boolean
