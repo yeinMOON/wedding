@@ -33,5 +33,11 @@ src/
   sections/          섹션 단위 컴포넌트 + CSS
   components/        공용 컴포넌트
 api/                 Vercel 서버리스 함수 (노션 연동)
+  _notion.ts         REST 래퍼, 속성명 상수
+  slots.ts           GET  슬롯별 확정 인원
+  rsvp.ts            POST 참석 신청 (이름 매칭 → 갱신/생성, 정원 검사, 티켓 코드 발급)
+  ticket.ts          GET  티켓 코드 → 이름·시간대·인원
+src/pages/TicketPage /t/:code 모바일 티켓 (캔버스 → 이미지 저장)
+src/lib/api.ts       API 클라이언트. `vite dev`에서 VITE_API_PROXY 없으면 목업
 docs/                기획·결정 문서
 ```

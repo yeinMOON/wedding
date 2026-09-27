@@ -1,0 +1,16 @@
+.field { display: flex; flex-direction: column; gap: var(--sp-2); }
+.field__label { font-size: var(--fs-small); color: var(--c-ink-2); }
+.field__row { display: flex; gap: var(--sp-2); align-items: stretch; }
+.field__input {
+  flex: 1; min-width: 0;
+  font: inherit; font-size: 16px; /* iOS 자동 확대 방지 */
+  padding: 14px 0;
+  border: 0; border-bottom: 1px solid var(--c-ink);
+  border-radius: 0; background: transparent; color: var(--c-ink);
+  transition: border-color var(--dur-fast);
+}
+.field__input:focus { outline: none; border-bottom-width: 2px; }
+.field__input::placeholder { color: var(--c-ink-3); }
+.field--error .field__input { border-color: #b3261e; }
+.field__hint { font-size: var(--fs-micro); color: var(--c-ink-3); letter-spacing: 0.02em; }
+.field--error .field__hint { color: #b3261e; }
