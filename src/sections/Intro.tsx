@@ -37,7 +37,7 @@ export function Intro() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.1 }}
       >
-        {EVENT.timeLabel} · {EVENT.venue.name}
+        {EVENT.timeLabel} · {EVENT.venue.address}
       </motion.p>
     </section>
   )

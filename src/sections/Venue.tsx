@@ -61,8 +61,8 @@ export function Venue({ family = false }: { family?: boolean }) {
       </Reveal>
 
       <Reveal delay={0.1} className="venue__place">
-        <p className="venue__name">{EVENT.venue.name}</p>
         <p className="venue__addr">{EVENT.venue.address}</p>
+        <p className="venue__name">{EVENT.venue.name}</p>
         <div className="venue__actions">
           <a className="venue__btn" href={EVENT.venue.naverShort} target="_blank" rel="noreferrer">네이버 지도</a>
           <a className="venue__btn" href={KAKAO_MAP} target="_blank" rel="noreferrer">카카오맵</a>

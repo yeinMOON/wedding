@@ -20,8 +20,8 @@
 .venue__dot--family { background: var(--c-grass); }
 .venue__dot--open { background: var(--c-sea); }
 
-.venue__name { font-size: var(--fs-h1); font-weight: 500; letter-spacing: -0.01em; }
-.venue__addr { margin-top: var(--sp-1); color: var(--c-ink-2); }
+.venue__addr { font-size: var(--fs-h2); font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; }
+.venue__name { margin-top: var(--sp-1); font-size: var(--fs-small); color: var(--c-ink-3); }
 .venue__actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-4); flex-wrap: wrap; }
 .venue__btn {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--sp-4);
