@@ -126,7 +126,8 @@ export function Rsvp() {
               <h2 className="rsvp__q">누가 오시나요?</h2>
               <div className="rsvp__fields">
                 <Field label="이름" value={form.name} onChange={(e) => set('name', e.target.value)}
-                  placeholder="청첩장에 적힌 이름" autoComplete="name" maxLength={20} />
+                  placeholder="홍길동" autoComplete="name" maxLength={20}
+                  hint="초청 명단과 맞춰볼 수 있게 본명으로 적어주세요" />
                 <Field label="휴대폰 번호" value={form.phone} onChange={(e) => set('phone', e.target.value)}
                   placeholder="010-0000-0000" inputMode="tel" autoComplete="tel" type="tel"
                   hint="티켓 안내에만 사용합니다" />
@@ -181,7 +182,7 @@ export function Rsvp() {
               <h2 className="rsvp__q">그래도 이름은 남겨주세요.</h2>
               {error && <p className="rsvp__error">{error}</p>}
               <div className="rsvp__fields">
-                <Field label="이름" value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="청첩장에 적힌 이름" maxLength={20} />
+                <Field label="이름" value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="홍길동" maxLength={20} />
                 <Field label="한마디 (선택)" value={form.message} onChange={(e) => set('message', e.target.value)} placeholder="" maxLength={200} />
               </div>
               <Button disabled={!nameOk} onClick={submit}>전하기</Button>
