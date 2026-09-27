@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "eslint .",
-    "typecheck:api": "tsc -p api/tsconfig.json"
+    "typecheck:api": "tsc -p api/tsconfig.json",
+    "dev:full": "vercel dev"
   },
   "dependencies": {
     "motion": "^12.0.0",

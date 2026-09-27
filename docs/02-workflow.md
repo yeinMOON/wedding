@@ -17,11 +17,21 @@
 ## 로컬
 
 ```
-nvm use          # Node 22
+git clone https://github.com/yeinMOON/wedding.git && cd wedding
+nvm use                       # Node 22
 npm install
-npm run dev
-npm run build    # 타입체크 + 빌드
+cp .env.example .env.local    # 값 채우기. .env.local은 git에 올라가지 않는다
 ```
+
+세 가지 실행 방법이 있다. 대부분은 1번이면 된다.
+
+| 명령 | 프론트 | /api | 언제 |
+|---|---|---|---|
+| `npm run dev` | 로컬 | **목업** (노션에 쓰지 않음) | 화면·인터랙션 작업 |
+| `npm run dev` + `.env.local`의 `VITE_API_PROXY=프리뷰URL` | 로컬 | Vercel 프리뷰의 실제 함수 | 폼을 실제 노션과 붙여 볼 때 |
+| `npm run dev:full` (`vercel dev`) | 로컬 | 로컬에서 함수 실행 | 함수 코드를 고칠 때. `npm i -g vercel` 후 `vercel link`, `vercel env pull .env.local`로 환경변수를 받아온다 |
+
+`vercel env pull`을 쓰면 Vercel에 넣어둔 `NOTION_TOKEN`이 `.env.local`로 내려오므로 토큰을 따로 복사할 필요가 없다.
 
 ## 구조
 
