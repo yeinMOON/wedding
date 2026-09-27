@@ -1,0 +1,47 @@
+/* 임시 디자인 토큰. 레퍼런스 확정 후 값만 교체한다. */
+:root {
+  /* 색: 화이트 큐브 + 블랙, 자연(바다·풀) 포인트 */
+  --c-bg: #f7f6f2;
+  --c-surface: #ffffff;
+  --c-ink: #141414;
+  --c-ink-2: #5a5a57;
+  --c-ink-3: #9a9994;
+  --c-line: #e3e1da;
+  --c-sea: #2f5d6b;
+  --c-grass: #6b7f4a;
+  --c-accent: var(--c-sea);
+
+  /* 타이포 */
+  --f-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --f-serif: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+  --fs-display: clamp(2.4rem, 11vw, 3.6rem);
+  --fs-h1: 1.75rem;
+  --fs-h2: 1.25rem;
+  --fs-body: 1rem;
+  --fs-small: 0.8125rem;
+  --fs-micro: 0.6875rem;
+  --lh-tight: 1.15;
+  --lh-body: 1.65;
+  --ls-caps: 0.14em;
+
+  /* 간격 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+  --sp-9: 112px;
+  --gutter: 24px;
+  --max-w: 500px;
+
+  /* 모션 */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 360ms;
+  --dur-slow: 720ms;
+
+  --radius: 2px;
+}

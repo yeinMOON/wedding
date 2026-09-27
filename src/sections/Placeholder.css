@@ -1,0 +1,9 @@
+.placeholder {
+  min-height: 40vh;
+  border-top: 1px solid var(--c-line);
+}
+.placeholder__note {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-small);
+  color: var(--c-ink-3);
+}
