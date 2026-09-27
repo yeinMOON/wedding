@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck:api": "tsc -p api/tsconfig.json",
+    "dev:full": "vercel dev"
   },
   "dependencies": {
     "motion": "^12.0.0",
@@ -20,6 +22,7 @@
     "@types/node": "^26.6.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vercel/node": "^16.0.1",
     "@vitejs/plugin-react": "^4.3.0",
     "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.0.0",

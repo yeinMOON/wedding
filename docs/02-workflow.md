@@ -17,11 +17,21 @@
 ## 로컬
 
 ```
-nvm use          # Node 22
+git clone https://github.com/yeinMOON/wedding.git && cd wedding
+nvm use                       # Node 22
 npm install
-npm run dev
-npm run build    # 타입체크 + 빌드
+cp .env.example .env.local    # 값 채우기. .env.local은 git에 올라가지 않는다
 ```
+
+세 가지 실행 방법이 있다. 대부분은 1번이면 된다.
+
+| 명령 | 프론트 | /api | 언제 |
+|---|---|---|---|
+| `npm run dev` | 로컬 | **목업** (노션에 쓰지 않음) | 화면·인터랙션 작업 |
+| `npm run dev` + `.env.local`의 `VITE_API_PROXY=프리뷰URL` | 로컬 | Vercel 프리뷰의 실제 함수 | 폼을 실제 노션과 붙여 볼 때 |
+| `npm run dev:full` (`vercel dev`) | 로컬 | 로컬에서 함수 실행 | 함수 코드를 고칠 때. `npm i -g vercel` 후 `vercel link`, `vercel env pull .env.local`로 환경변수를 받아온다 |
+
+`vercel env pull`을 쓰면 Vercel에 넣어둔 `NOTION_TOKEN`이 `.env.local`로 내려오므로 토큰을 따로 복사할 필요가 없다.
 
 ## 구조
 
@@ -33,5 +43,11 @@ src/
   sections/          섹션 단위 컴포넌트 + CSS
   components/        공용 컴포넌트
 api/                 Vercel 서버리스 함수 (노션 연동)
+  _notion.ts         REST 래퍼, 속성명 상수
+  slots.ts           GET  슬롯별 확정 인원
+  rsvp.ts            POST 참석 신청 (이름 매칭 → 갱신/생성, 정원 검사, 티켓 코드 발급)
+  ticket.ts          GET  티켓 코드 → 이름·시간대·인원
+src/pages/TicketPage /t/:code 모바일 티켓 (캔버스 → 이미지 저장)
+src/lib/api.ts       API 클라이언트. `vite dev`에서 VITE_API_PROXY 없으면 목업
 docs/                기획·결정 문서
 ```
