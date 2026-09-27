@@ -47,7 +47,7 @@ export function TicketPage({ code }: { code: string }) {
           <canvas ref={canvasRef} className="ticket__canvas" width={1080} height={1620} />
           <div className="ticket__actions">
             <Button onClick={save}>이미지로 저장</Button>
-            <p className="ticket__hint">입장 시 이 화면 또는 저장한 이미지를 보여주세요.</p>
+            <p className="ticket__hint">당일 시간과 장소를 잊지 않도록 간직해 주세요.</p>
             <a className="ticket__home" href="/">전시 안내로</a>
           </div>
         </>
