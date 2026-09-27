@@ -55,11 +55,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // 1) 이름으로 기존 행 찾기
+    // 1) 기존 행 찾기: 이름 완전 일치 → 전화번호가 같은 행 → 유일하고 전화번호가 비어 있는(또는 이번에 번호가 없는) 행 → 없으면 신규
+    const formattedPhone = phone ? phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, '$1-$2-$3') : ''
     const matches = await queryAll({ property: PROP.name, title: { equals: name } })
-    const target = matches.length === 1 ? matches[0] : null
-    const memo =
-      matches.length === 0 ? '사이트에서 신규 생성' : matches.length > 1 ? '동명이인 확인 필요 (사이트 신규 생성)' : ''
+    const samePhone = phone
+      ? matches.find((p) => (read.phone(p, PROP.phone) ?? '').replace(/[^0-9]/g, '') === phone)
+      : undefined
+    // 전화번호를 안 받는 불참 응답은 이름 1건 일치면 그 행으로 간다
+    const soleEmpty = matches.length === 1 && (!phone || !read.phone(matches[0], PROP.phone)) ? matches[0] : undefined
+    const target = samePhone ?? soleEmpty ?? null
+    const memo = target
+      ? ''
+      : matches.length === 0
+        ? '사이트에서 신규 생성'
+        : '동명이인 확인 필요 (사이트 신규 생성)'
 
     // 2) 정원 확인 (본인 기존 인원 제외). 가족 시간은 정원 없음
     if (attending && slot && slot !== FAMILY_SLOT) {
@@ -83,7 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       [PROP.slot]: write.select(slot),
       [PROP.headcount]: write.number(headcount),
       [PROP.ticketType]: write.select(ticketType),
-      [PROP.phone]: write.phone(phone ? phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, '$1-$2-$3') : null),
+      [PROP.phone]: write.phone(formattedPhone || null),
       [PROP.postcode]: write.text(postcode),
       [PROP.address]: write.text(address),
       [PROP.ticketCode]: write.text(attending ? ticketCode : ''),
